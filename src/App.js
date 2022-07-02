@@ -10,9 +10,13 @@ const App = ()  => {
       {id :'2', title : "Title 2"},
       {id :'3', title : "Title 3"}
     ])
+
+    const deleteProduct = (id) => {
+      setProducts(products.filter((item) => item.id !== id))
+    }
   return(
     <div className="container" >
-      <ProductList products={products}/>
+      <ProductList products={products} onDelete={deleteProduct}/>
     </div>
   )
 }

@@ -1,12 +1,13 @@
 import './Product.css'
-const Product = ({title}) =>{
+const Product = ({product, onDelete}) =>{
 
   
   return (
     <div className='product'>
-      <div>{title}</div>
+      <div>{product.title}</div>
       <div>
-        <button className="btn" onClick={titleHandler}>Title</button>
+        <button className="btn" onClick={() => onDelete(product.id) }>
+          Delete</button>
       </div>
     </div>
   )
