@@ -1,9 +1,7 @@
 import './Product.css'
 const Product = ({title}) =>{
 
-  const titleHandler = () => {
-    console.log(title);
-  }
+  
   return (
     <div className='product'>
       <div>{title}</div>
