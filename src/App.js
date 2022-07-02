@@ -1,7 +1,13 @@
+import Product from './components/Product'
 
-function App(){
+const App = ()  => {
   return(
-    <div id="app" className="container">Warm Hello to React World</div>
+    <div className="container" >
+      <Product title="Title1" />
+      <Product title="Title2"/>
+      <Product title="Title3" />
+
+    </div>
   )
 }
 
