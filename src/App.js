@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import AddProduct from './components/AddProduct/AddProduct'
 // import Product from './components/Product/Product'
 import ProductList from './components/ProductList/ProductList'
@@ -6,13 +6,35 @@ import ProductList from './components/ProductList/ProductList'
 const App = ()  => {
 
   const [products, setProducts] = useState([])
-    const addProduct = (title) => {
-      const id = Math.floor(Math.random() * 10000);
-      const newProduct = {id , ...title}
 
-      setProducts([...products, newProduct]);
+  useEffect(() => {
+    const sendRequest = async () => {
+      const response = await fetch('http://localhost:8000/products' , {});
+      const responseData = await response.json();
+
+      setProducts(responseData);
     }
-    const deleteProduct = (id) => {
+
+    sendRequest();
+  }, []);
+    const addProduct = async(title) => {
+      const response = await fetch('http://localhost:8000/products', {
+        method : 'POST',
+        headers : {
+          'Content-type' : 'application/json',
+        },
+        body : JSON.stringify(title),
+      })
+
+      const responseData = await response.json();
+      setProducts([...products, responseData]);
+    }
+
+    //Deleting Products
+    const deleteProduct = async(id) => {
+      await fetch(`http://localhost:8000/products/${id}`, {
+        method : 'DELETE'
+      });
       setProducts(products.filter((item) => item.id !== id))
     }
   return(
